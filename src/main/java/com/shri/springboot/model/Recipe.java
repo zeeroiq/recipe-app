@@ -2,8 +2,10 @@ package com.shri.springboot.model;
 
 import com.shri.springboot.model.enums.Difficulty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -24,13 +26,16 @@ public class Recipe {
     private Integer serving;
     private String source;
     private String url;
+    private Integer servings;
+
+    @Lob
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredient;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private byte[] image;
@@ -44,5 +49,7 @@ public class Recipe {
         joinColumns = @JoinColumn(name = "recipe_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    @EqualsAndHashCode.Exclude
+    private Set<Category> categories = new HashSet<>();
+
 }
