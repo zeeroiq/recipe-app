@@ -1,6 +1,7 @@
 package com.shri.springboot.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ public class Ingredient {
     private UnitOfMeasure unitOfMeasure;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
     private Recipe recipe;
 
     public Ingredient() {

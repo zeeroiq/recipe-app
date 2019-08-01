@@ -9,5 +9,5 @@ import java.util.Set;
  * @Date: 7/22/2019 5:52 AM
  */
 public interface RecipeService{
-    Set<Recipe> getRecipies();
+    public Set<Recipe> getRecipies();
 }

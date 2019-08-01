@@ -13,6 +13,7 @@ import java.util.Set;
  * @Date: 7/22/2019
  */
 @Data
+@EqualsAndHashCode(exclude = "notes")
 @Entity
 public class Recipe {
 
@@ -49,7 +50,16 @@ public class Recipe {
         joinColumns = @JoinColumn(name = "recipe_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @EqualsAndHashCode.Exclude
     private Set<Category> categories = new HashSet<>();
 
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
 }
