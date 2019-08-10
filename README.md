@@ -1,3 +1,1 @@
-# Sample
-Nothing is here
-nuhjunkjnkjnjn
+#SpringBoot recipe-application
