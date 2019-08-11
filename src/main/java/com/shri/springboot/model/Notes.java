@@ -1,7 +1,7 @@
 package com.shri.springboot.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,8 +9,8 @@ import javax.persistence.*;
  * @Author: ZeeroIQ
  * @Date: 7/22/2019
  */
-@Data
-@EqualsAndHashCode(exclude = "{recipe}")
+@Getter
+@Setter
 @Entity
 public class Notes {
 

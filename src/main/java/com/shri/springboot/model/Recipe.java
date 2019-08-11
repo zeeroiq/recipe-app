@@ -13,7 +13,7 @@ import java.util.Set;
  * @Date: 7/22/2019
  */
 @Data
-@EqualsAndHashCode(exclude = "notes")
+@EqualsAndHashCode(exclude = "{notes}")
 @Entity
 public class Recipe {
 
