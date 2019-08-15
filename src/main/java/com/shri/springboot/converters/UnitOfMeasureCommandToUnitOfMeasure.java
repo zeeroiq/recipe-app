@@ -22,7 +22,7 @@ public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeas
             return null;
         }
 
-        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        final UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
         unitOfMeasure.setId(src.getId());
         unitOfMeasure.setDescription(src.getDescription());
 

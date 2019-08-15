@@ -20,7 +20,7 @@
 
 </head>
 <body>
-
+    <!--/*@thymesVar id="recipe" type="com.shri.springboot.model.Recipe"*/-->
     <div class="container-fluid" style="margin-top: 20px" >
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -36,22 +36,30 @@
                                     <th>Id</th>
                                     <th>Description</th>
                                     <th>View</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tr th:remove="all">
                                     <td th:text="${recipe.id}">12</td>
                                     <td th:text="${recipe.description}">Masst hai</td>
                                     <td><a href="#">View</a></td>
+                                    <td><a href="#">Update</a></td>
+                                    <td><a href="#">Delete</a></td>
                                 </tr>
                                 <tr th:remove="all">
                                     <td th:text="${recipe.id}">123</td>
                                     <td th:text="${recipe.description}">Sai hai</td>
                                     <td><a href="#">View</a></td>
+                                    <td><a href="#">Update</a></td>
+                                    <td><a href="#">Delete</a></td>
                                 </tr>
                                 <tr th:each="recipe: ${recipes}">
                                     <td th:text="${recipe.id}">12</td>
                                     <td th:text="${recipe.description}">Masst hai</td>
-                                    <td><a href="#" th:href="@{'recipe/show/' + ${recipe.id}}">View</a></td>
+                                    <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                                    <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                                    <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
                                 </tr>
                             </table>
                         </div>

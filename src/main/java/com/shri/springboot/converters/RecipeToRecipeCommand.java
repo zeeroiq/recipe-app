@@ -1,6 +1,7 @@
 package com.shri.springboot.converters;
 
 import com.shri.springboot.commands.RecipeCommand;
+import com.shri.springboot.model.Category;
 import com.shri.springboot.model.Recipe;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -32,7 +33,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
             return null;
         }
 
-        RecipeCommand recipeCommand = new RecipeCommand();
+        final RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(source.getId());
         recipeCommand.setCookTime(source.getCookTime());
         recipeCommand.setDescription(source.getDescription());
@@ -46,7 +47,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
         if(source.getCategories() != null && source.getCategories().size() > 0) {
             source.getCategories()
-                    .forEach(category -> recipeCommand.getCategories().add(categoryConverter.convert(category)));
+                    .forEach((Category category) -> recipeCommand.getCategories().add(categoryConverter.convert(category)));
         }
 
         if(source.getIngredients() != null && source.getIngredients().size() > 0) {
@@ -54,6 +55,6 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
                     .forEach(ingredient -> recipeCommand.getIngredients().add(ingredientConverter.convert(ingredient)));
         }
 
-        return null;
+        return recipeCommand;
     }
 }

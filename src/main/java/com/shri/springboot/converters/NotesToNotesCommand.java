@@ -22,7 +22,7 @@ public class NotesToNotesCommand implements Converter<Notes, NotesCommand> {
             return null;
         }
 
-        NotesCommand notesCommand = new NotesCommand();
+        final NotesCommand notesCommand = new NotesCommand();
         notesCommand.setId(source.getId());
         notesCommand.setRecipeNotes(source.getRecipeNotes());
 

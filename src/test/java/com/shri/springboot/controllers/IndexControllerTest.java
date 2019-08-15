@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @Author: ZeeroIQ
  * @Date: 7/26/2019 5:13 AM
  */
+
 public class IndexControllerTest {
 
     @Mock
@@ -34,22 +35,26 @@ public class IndexControllerTest {
 
     IndexController indexController;
 
+
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+		
         indexController = new IndexController(recipeService);
     }
 
     @Test
-    public void testMockMvc() throws Exception {
+    public void testMockMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
 
     @Test
-    public void getIndexPage() {
+    public void getIndexPage() throws Exception {
+
         //given
         Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());

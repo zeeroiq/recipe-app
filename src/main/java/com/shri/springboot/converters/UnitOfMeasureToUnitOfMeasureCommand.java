@@ -18,14 +18,15 @@ public class UnitOfMeasureToUnitOfMeasureCommand implements Converter<UnitOfMeas
     @Nullable
     @Override
     public UnitOfMeasureCommand convert(UnitOfMeasure src) {
-        if (src == null) {
-            return null;
+        if (src != null) {
+			final UnitOfMeasureCommand command = new UnitOfMeasureCommand();
+	        command.setId(src.getId());
+	        command.setDescription(src.getDescription());
+
+	        return command;
         }
 
-        UnitOfMeasureCommand command = new UnitOfMeasureCommand();
-        command.setId(src.getId());
-        command.setDescription(src.getDescription());
-
-        return command;
+        
+            return null;
     }
 }
