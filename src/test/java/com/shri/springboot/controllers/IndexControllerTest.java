@@ -4,9 +4,11 @@ import com.shri.springboot.model.Recipe;
 import com.shri.springboot.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @Author: ZeeroIQ
  * @Date: 7/26/2019 5:13 AM
  */
-
+@ExtendWith(MockitoExtension.class)
 public class IndexControllerTest {
 
     @Mock
