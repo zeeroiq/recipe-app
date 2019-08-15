@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Unit Of Measurement</label>
-                                    <select class="form-control" name="uom.id">
-                                        <option th:each="uomEach: ${uomList}"
+                                    <select class="form-control" name="unitOfMeasure.id">
+                                        <option th:each="uomEach : ${uomList}"
                                                 th:value="${uomEach.id}"
                                                 th:selected="${uomEach.id.equals(ingredient.unitOfMeasure.id)}"
                                                 th:text="${uomEach.description}">Each</option>
