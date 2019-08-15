@@ -23,20 +23,34 @@
             <!--<div class="card-group">-->
 
             <div class="card card-info">
-                <div class="card-header bg-info">
-                    <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                <div class="card-header bg-info text-white">
+                    <div class="row">
+                        <div class="col-md-10 ">
+                            <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-info" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
                             <h5>Categories:</h5>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-3">
                             <ul>
                                 <li th:remove="all">cat one</li>
                                 <li th:remove="all">cat two</li>
                                 <li th:each="category : ${recipe.categories}" th:text="${recipe.getDescription()}">cat three</li>
                             </ul>
+
+                        </div>
+                        <div class="col-md-6">
+                            <img src="../../static/images/guacamole400x400WithX.jpg"
+                                th:src="@{'/recipe/' + ${recipe.id} + '/recipeImage'}"
+                                width="200" height="200">
                         </div>
                     </div>
                     <div class="row">

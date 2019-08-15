@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}" ></script>
+
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+
+    <title>Show</title>
+</head>
+<body>
+<!--/*@thymesVar id="recipe" type="com.shri.springboot.model.Recipe"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form  action="http:\\localhost" method="post" enctype="multipart/form-data"
+                   th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}" th:method="post">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h2 class="card-title">Upload a new recipe image</h2>
+                    </div>
+                    <div class="card-body">
+                        <label class="col-form-label">Select File</label>
+                        <input id="imageFile" name="imageFile" type="file" class="form-control-file"/>
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
