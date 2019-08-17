@@ -1,9 +1,12 @@
 package com.shri.springboot.services;
 
+import com.shri.springboot.commands.RecipeCommand;
 import com.shri.springboot.converters.RecipeCommandToRecipe;
 import com.shri.springboot.converters.RecipeToRecipeCommand;
+import com.shri.springboot.exceptions.NotFoundException;
 import com.shri.springboot.model.Recipe;
 import com.shri.springboot.repositories.RecipeRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -35,6 +38,38 @@ public class RecipeServiceImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+    }
+
+    @Test
+    public void getRecipeByIdNotFoundTest() throws Exception{
+        Optional<Recipe> optionalRecipe = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
+
+        Recipe recipeReturned = recipeService.findById(1L);
+        Assertions.assertThrows(NotFoundException.class, () -> {});
+    }
+
+
+    @Test
+    public void getRecipeCommandById() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1l);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1l);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+
+        assertNotNull("null recipe returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 
     @Test

@@ -28,10 +28,12 @@ public class ImageServiceImpl implements ImageService {
         try {
             Recipe recipe = recipeRepository.findById(id).get();
             Byte[] byteObject = new Byte[imageFile.getBytes().length];
+
             int i=0;
             for (byte b: imageFile.getBytes()) {
                 byteObject[i++] = b;
             }
+
             recipe.setImage(byteObject);
 
             recipeRepository.save(recipe);

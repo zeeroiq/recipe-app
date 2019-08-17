@@ -3,6 +3,7 @@ package com.shri.springboot.services;
 import com.shri.springboot.commands.RecipeCommand;
 import com.shri.springboot.converters.RecipeCommandToRecipe;
 import com.shri.springboot.converters.RecipeToRecipeCommand;
+import com.shri.springboot.exceptions.NotFoundException;
 import com.shri.springboot.model.Recipe;
 import com.shri.springboot.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +41,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe findById(Long l) {
+    public Recipe findById(Long l){
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
         if(!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe not found");
+            //throw new RuntimeException("Recipe not found");
+            throw new NotFoundException("Recipe not found for id "+ l.toString());
         }
 
         return recipeOptional.get();

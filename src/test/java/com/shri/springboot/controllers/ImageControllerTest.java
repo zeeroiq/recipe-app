@@ -1,8 +1,10 @@
 package com.shri.springboot.controllers;
 
 import com.shri.springboot.commands.RecipeCommand;
+import com.shri.springboot.exceptions.ControllerExceptionHandler;
 import com.shri.springboot.services.ImageService;
 import com.shri.springboot.services.RecipeService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +16,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -43,12 +44,15 @@ class ImageControllerTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         imageController = new ImageController(imageService, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(imageController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(imageController)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
     void handleImagePost() throws Exception {
-        MockMultipartFile multipartFile = new MockMultipartFile("file", "testing.txt", "text/plain", "something".getBytes());
+        MockMultipartFile multipartFile =
+                new MockMultipartFile("imageFile", "testing.txt", "text/plain", "something".getBytes());
 
         mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
                 .andExpect(status().is3xxRedirection())
@@ -79,6 +83,12 @@ class ImageControllerTest {
         String s= "Some image";
         Byte[] byteBox = new Byte[s.getBytes().length];
 
+        int i = 0;
+
+        for (byte primByte : s.getBytes()){
+            byteBox[i++] = primByte;
+        }
+
         command.setImage(byteBox);
 
         when(recipeService.findCommandById(anyLong())).thenReturn(command);
@@ -89,7 +99,16 @@ class ImageControllerTest {
 
         byte[] responseByte = response.getContentAsByteArray();
 
-        assertEquals(s.getBytes().length, responseByte.length);
+        Assertions.assertEquals(s.getBytes().length, responseByte.length);
     }
+
+    @Test
+    public void getImageNumberFormatException() throws Exception {
+
+        mockMvc.perform(get("/recipe/dsfsfsa/image"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
+    }
+
 
 }
