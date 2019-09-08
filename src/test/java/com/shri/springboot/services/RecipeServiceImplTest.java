@@ -27,7 +27,10 @@ import static org.springframework.test.util.AssertionErrors.assertNotNull;
 public class RecipeServiceImplTest {
 
     RecipeServiceImpl recipeService;
+
+    @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
+    @Mock
     RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
@@ -46,8 +49,8 @@ public class RecipeServiceImplTest {
 
         when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
 
-        Recipe recipeReturned = recipeService.findById(1L);
-        Assertions.assertThrows(NotFoundException.class, () -> {});
+//        Recipe recipeReturned = recipeService.findById(1L);
+        Assertions.assertThrows(NotFoundException.class, () -> recipeService.findById(1L));
     }
 
 
